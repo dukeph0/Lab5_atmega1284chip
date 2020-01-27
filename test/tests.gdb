@@ -28,84 +28,73 @@ echo Running all tests..."\n\n
 
 # Add tests below
 
-test "PINA: 0x00 => PORTC: 0x40"
-# Set inputs
-setPINA ~0x00
-# Continue for several ticks
-continue 5
-# Set expect values
-expectPORTC 0x40
-# Check pass/fail
-checkResult
-
-test "PINA: 0x01 => PORTC: 0x60"
-# Set inputs
+#test sequeence from init: A0 & !A1, !A0 & !A1,  A0 & !A1,!A0 and !A1, A0 & !A1,!A0 AND !A1, !A0 & A1, => PORTC: 8
+test "Add, Add, Add, subtract\nPINA: 0x01, 0x11, 0x01,0x11, 0x01, 0x11, 0x10, 0x11, => PC = 0x08  state:interphase"
+set addsm = init 
+continue 2
 setPINA ~0x01
-# Continue for several ticks
-continue 5
-# Set expect values
-expectPORTC 0x60
-# Check pass/fail
+continue 2
+setPINA ~0x00
+continue 2
+setPINA ~0x01
+continue 2
+setPINA ~0x00
+continue 2
+setPINA ~0x01
+continue 2
+setPINA ~0x00
+continue 2
+setPINA ~0x02
+continue 2
+setPINA ~0x00
+continue 2
+expectPORTC 0x08
+expect addsm interphase
 checkResult
 
-test "PINA: 0x04 => PORTC: 0x70"
-# Set inputs
-setPINA ~0x04
-# Continue for several ticks 
-continue 5
-# Set expect values
-expectPORTC 0x70
-# Check pass/fail
+#test sequeence from init: A0 & !A1, !A0 & !A1,  A0 & !A1,!A0 and !A1, A0 & !A1,!A0 AND !A1, !A0 & A1, => PORTC: 8
+test "Reset Sub Sub, Sub, Sub \nPINA: 0x02, 0x00, 0x02,0x00, 0x02, 0x00, 0x02, 0x00, => PC = 0x03  state:interphase"
+set addsm = init
+continue 2
+setPINA ~0x02
+continue 2
+setPINA ~0x00
+continue 2
+setPINA ~0x02
+continue 2
+setPINA ~0x00
+continue 2
+setPINA ~0x02
+continue 2
+setPINA ~0x00
+continue 2
+setPINA ~0x02
+continue 2
+setPINA ~0x00
+continue 2
+expectPORTC 0x03
+expect addsm interphase
 checkResult
 
-test "PINA: 0x05 => PORTC: 0x38"
-# Set inputs 
-setPINA ~0x05
-# Continue for several ticks 
-continue 5
-# Set expect values
-expectPORTC 0x38
-# Check pass/fail
-checkResult
+#test sequeence from init: A0 & !A1, !A0 & !A1,  A0 & !A1,!A0 and !A1, A0 & !A1,!A0 AND !A1, !A0 & A1, => PORTC: 8
+test "Add, ADd, Reset \nPINA: 0x02, 0x00, 0x02,0x00, 0x11, 0x00, 0x01, 0x00, => PC = 0x08  state:interphase"
+set addsm = init
+continue 2
+setPINA ~0x01
+continue 2
+setPINA ~0x00
+continue 2
+setPINA ~0x01
+continue 2
+setPINA ~0x00
+continue 2
+setPINA ~0x03
+continue 1
+setPINA ~0x00
+continue 1
 
-test "PINA: 0x08 => PORTC: 0x3C"
-# Set inputs 
-setPINA ~0x08
-# Continue for several ticks
-continue 5
-# Set expect values 
-expectPORTC 0x3C
-# Check pass/fail
-checkResult
-
-test "PINA: 0x0B => PORTC: 0x3E"
-# Set inputs 
-setPINA ~0x0B
-# Continue for several ticks 
-continue 5
-# Set expect values 
-expectPORTC 0x3E
-# Check pass/fail
-checkResult
-
-test "PINA: 0x0F => PORTC: 0x3F"
-# Set inputs
-setPINA ~0x0F
-# Continue for several ticks 
-continue 5
-# Set expect values 
-expectPORTC 0x3F
-# Check pass/fail
-checkResult
-
-test "PINA: 0xFF => PORTC: 0x3F"
-# Set inputs 
-setPINA ~0xFF
-# Continue for several ticks 
-continue 5
-# Set expect values 
-expectPORTC 0x3F
-# Check pass/fail
+expectPORTC 0x00
+expect addsm interphase
 checkResult
 
 # Report on how many tests passed/tests ran
