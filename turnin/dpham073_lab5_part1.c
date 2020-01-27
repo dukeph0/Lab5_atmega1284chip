@@ -1,7 +1,7 @@
 /*	Author: dukeph0 - Duke Pham
  *  Partner(s) Name: Juvenal Ortega - Email: jorte057@ucr.edu
  *	Lab Section:
- *	Assignment: Lab #  Exercise #
+ *	Assignment: Lab 5  Exercise 1
  *	Exercise Description: [optional - include for your own benefit]
  *
  *	I acknowledge all content contained herein, excluding template or example
