@@ -26,19 +26,87 @@
 echo ======================================================\n
 echo Running all tests..."\n\n
 
-# Example test:
-test "PINA: 0x00, PINB: 0x00 => PORTC: 0"
+# Add tests below
+
+test "PINA: 0x00 => PORTC: 0x40"
 # Set inputs
-setPINA 0x00
-setPINB 0x00
+setPINA ~0x00
 # Continue for several ticks
-continue 2
+continue 5
 # Set expect values
-expectPORTC 0
+expectPORTC 0x40
 # Check pass/fail
 checkResult
 
-# Add tests below
+test "PINA: 0x01 => PORTC: 0x60"
+# Set inputs
+setPINA ~0x01
+# Continue for several ticks
+continue 5
+# Set expect values
+expectPORTC 0x60
+# Check pass/fail
+checkResult
+
+test "PINA: 0x04 => PORTC: 0x70"
+# Set inputs
+setPINA ~0x04
+# Continue for several ticks 
+continue 5
+# Set expect values
+expectPORTC 0x70
+# Check pass/fail
+checkResult
+
+test "PINA: 0x05 => PORTC: 0x38"
+# Set inputs 
+setPINA ~0x05
+# Continue for several ticks 
+continue 5
+# Set expect values
+expectPORTC 0x38
+# Check pass/fail
+checkResult
+
+test "PINA: 0x08 => PORTC: 0x3C"
+# Set inputs 
+setPINA ~0x08
+# Continue for several ticks
+continue 5
+# Set expect values 
+expectPORTC 0x3C
+# Check pass/fail
+checkResult
+
+test "PINA: 0x0B => PORTC: 0x3E"
+# Set inputs 
+setPINA ~0x0B
+# Continue for several ticks 
+continue 5
+# Set expect values 
+expectPORTC 0x3E
+# Check pass/fail
+checkResult
+
+test "PINA: 0x0F => PORTC: 0x3F"
+# Set inputs
+setPINA ~0x0F
+# Continue for several ticks 
+continue 5
+# Set expect values 
+expectPORTC 0x3F
+# Check pass/fail
+checkResult
+
+test "PINA: 0xFF => PORTC: 0x3F"
+# Set inputs 
+setPINA ~0xFF
+# Continue for several ticks 
+continue 5
+# Set expect values 
+expectPORTC 0x3F
+# Check pass/fail
+checkResult
 
 # Report on how many tests passed/tests ran
 set $passed=$tests-$failed
